@@ -1,4 +1,6 @@
-import Cocoa
+//: [Previous](@previous)
+
+import Foundation
 import CoreGraphics
 
 var greeting = "Hello, playground"
@@ -82,3 +84,6 @@ print(c + e)
 /// so although you will see `CGFloat` appear from time to time you can just ignore it.
 /// OLIVIER: It doesn't work with `Float`:
 // print(a + e) // ERROR
+
+
+//: [Next](@next)
