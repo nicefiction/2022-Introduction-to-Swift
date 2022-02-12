@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='macos' buildActiveScheme='true' importAppTypes='true'>
     <pages>
-        <page name='Day 1'/>
-        <page name='Day 2'/>
         <page name='Checkpoint 1'/>
-        <page name='Day 3'/>
-        <page name='Day 4'/>
         <page name='Checkpoint 2'/>
-        <page name='Day 5'/>
-        <page name='Day 6 • Loops'/>
         <page name='Checkpoint 3'/>
+        <page name='Day 1 • Simple Data Types part 1'/>
+        <page name='Day 2 • Simple Data Types part 2'/>
+        <page name='Day 3 • Complex Data Types part 1'/>
+        <page name='Day 4 • Complex Data Types part 2'/>
+        <page name='Day 5 • Conditions'/>
+        <page name='Day 6 • Loops'/>
+        <page name='Day 7 • Functions part 1'/>
     </pages>
 </playground>
