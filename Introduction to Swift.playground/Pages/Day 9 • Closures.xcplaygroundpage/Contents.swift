@@ -215,4 +215,109 @@ animate(duration: 3.00) {
 }
 /// Trailing closures work best when their meaning is directly attached to the name of the function
 /// — you can see what the closure is doing because the function is called `animate()`.
+
+
+
+/// How to accept functions as parameters
+/// https://www.hackingwithswift.com/quick-start/beginners/how-to-accept-functions-as-parameters
+
+func sayHello() {
+    
+    print("Hello")
+}
+
+
+let sayHelloAgain: () -> Void = sayHello
+
+sayHelloAgain // () -> ()
+sayHelloAgain() // "Hello"
+
+
+
+func makeArray(withSize size: Int,
+               using generator: () -> Int)
+-> [Int] {
+    
+    var numbers = Array<Int>()
+    
+    for _ in 0...size {
+        let randomNumber = generator()
+        numbers.append(randomNumber)
+    }
+    
+    return numbers
+}
+
+/*
+ func makeArray(size: Int, using generator: () -> Int) -> [Int] {
+     var numbers = [Int]()
+
+     for _ in 0..<size {
+         let newNumber = generator()
+         numbers.append(newNumber)
+     }
+
+     return numbers
+ }
+ */
+let numbers = makeArray(withSize: 10,
+                        using: {
+    
+    let randomNumber = Int.random(in: 0...50)
+    return randomNumber
+})
+
+print("Array: \(numbers)")
+
+
+let shorthandNumbers = makeArray(withSize: 10) {
+    
+    let randomNumber = Int.random(in: 0...50)
+    return randomNumber
+}
+
+print("Shorthand numbers: \(shorthandNumbers)")
+
+
+
+func doImportantWork(task1: () -> Void,
+                     task2: () -> Void,
+                     task3: () -> Void) {
+    
+    print("About to start task 1.")
+    task1()
+    print("About to start task 2.")
+    task2()
+    print("About to start task 3.")
+    task3()
+}
+
+///OPTION 1:
+doImportantWork(task1: { print("Task 1")},
+                task2: { print("Task 2")},
+                task3: { print("Task 3")})
+
+///OPTION 2 (Olivier):
+doImportantWork(task1: { print("Usual Trailing Task 1")},
+                task2: { print("Usual Trailing Task 2")}) {
+    
+    print("Usual Trailing Task 3")
+}
+///OPTION 3:
+///When it comes to calling that,
+///the first trailing closure is identical to what we’ve used already,
+///but the second and third are formatted differently:
+///you end the brace from the previous closure,
+///then write the external parameter name and a colon,
+///then start another brace.
+
+doImportantWork {
+    print("Trailing Task 1")
+} task2: {
+    print("Trailing Task 2")
+} task3: {
+    print("Trailing Task 3")
+}
+
+
 //: [Next](@next)
