@@ -320,4 +320,27 @@ doImportantWork {
 }
 
 
+
+
+
+var remainingVacationDays: Int = 5
+let days: Int = 8
+
+let goOnVacation: (Int) -> String = { (days: Int) -> String in
+    
+    remainingVacationDays -= days
+    print("I am going on vacation!")
+    return ("Vacation days remaining: \(remainingVacationDays)")
+}
+
+
+let stayHome: () -> String = {
+    
+    return "There are not enough days remaining."
+}
+
+
+let closureDays: String = remainingVacationDays > days ? (goOnVacation(days)) : stayHome()
+print(closureDays)
+
 //: [Next](@next)
