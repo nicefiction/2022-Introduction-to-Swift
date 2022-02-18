@@ -301,4 +301,159 @@ var student = Student.init(debt: 100)
 student.debt = 3_000
 
 
+
+/// How to create custom initializers
+/// https://www.hackingwithswift.com/quick-start/beginners/how-to-create-custom-initializers
+/// IMPORTANT:
+/// Although you can call other methods of your struct inside your initializer,
+/// you can’t do so before assigning values to all your properties
+/// — Swift needs to be sure everything is safe before doing anything else.
+
+struct Player {
+    
+    var name: String
+    var id: Int
+}
+
+let player = Player.init(name: "Dorothy",
+                         id: 5)
+
+
+struct CustomPlayer {
+    
+    var name: String
+    var id: Int
+    
+    
+    init(name: String) {
+        
+        self.name = name
+        self.id   = Int.random(in: 0...100)
+    }
+    
+    init(customName: String,
+         customId: Int) {
+        /// OLIVIER: Using custom parameter names,
+        /// you can remove `self`in the initialiser
+        /// as everything is clear to the compiler now:
+        name = customName
+        id   = customId
+    }
+}
+
+let customPlayer = CustomPlayer.init(name: "Dorothy")
+print("Custom player id: \(customPlayer.id)")
+
+
+struct AnotherPlayer {
+    
+    var name: String
+    var id: Int = 3
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
+var anotherPlayer = AnotherPlayer.init(name: "Ozma")
+print("Another player ID: \(anotherPlayer.id)")
+//var anotherPlayer2 = AnotherPlayer(name: "Glinda", id: 5)
+/// OLIVIER: You cannot add `id` to the initializer.
+/// OLIVIER: You will need to add another initializer to the struct.
+/// TIP:
+/// As soon as you add a custom initializer for your struct,
+/// the default memberwise initializer goes away.
+/// If you want it to stay,
+/// move your custom initializer to an `extension`, like this:
+
+extension Player {
+    
+    init(name: String) {
+        self.name = name
+        self.id = Int.random(in: 0...99)
+    }
+}
+
+let playerExtension = Player.init(name: "Glinda")
+print("Player extension ID: \(playerExtension.id)")
+
+/// NOTE:
+/// Outside of initializers, the main reason for using `self` is
+/// because we are in a closure
+/// and Swift requires it so we are clear we understand what is happening.
+/// This is only needed when accessing `self` from inside a closure that belongs to a `class`,
+/// and Swift will refuse to build your code unless you add it.
+
+
+struct Country {
+    
+    var name: String
+    var isUsingImperialMeasurements: Bool
+    
+    init(countryName: String) {
+        name = countryName
+        let countries: [String] = [
+            "Liberia", "Myanmar", "USA"
+        ]
+        isUsingImperialMeasurements = countries.contains(name) ? true : false
+    }
+}
+
+
+struct Message {
+    
+    var from: String
+    var to: String
+    var content: String
+    
+    init() {
+        from = "Unknown sender"
+        to = "Unknown destination"
+        content = "Unknown content"
+    }
+}
+
+
+struct Cabinet {
+    
+    var width: Double
+    var height: Double
+    var area: Double
+}
+
+extension Cabinet {
+    
+    init(customWidth: Double,
+         customHeight: Double) {
+        
+        width = customWidth
+        height = customHeight
+        area = width * height
+    }
+}
+
+let cabinet = Cabinet.init(customWidth: 3.0,
+                           customHeight: 5.0)
+print("The area of the cabinet is \(cabinet.area).")
+
+
+struct Character {
+    
+    var name: String
+    var actor: String
+    var isProbablyGoingToDie: Bool
+    
+    init(customName: String,
+         actor: String) {
+        
+        name = customName
+        self.actor = actor
+        isProbablyGoingToDie = self.actor == "Dorothy" ? false : true
+    }
+}
+
+let character = Character(customName: "Gale",
+                          actor: "Dorothy")
+character.isProbablyGoingToDie // false
+
 //: [Next](@next)
