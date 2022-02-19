@@ -370,7 +370,7 @@ extension Player {
     
     init(name: String) {
         self.name = name
-        self.id = Int.random(in: 0...99)
+        self.id   = Int.random(in: 0...99)
     }
 }
 
@@ -421,6 +421,7 @@ struct Cabinet {
     var area: Double
 }
 
+
 extension Cabinet {
     
     init(customWidth: Double,
@@ -435,6 +436,7 @@ extension Cabinet {
 let cabinet = Cabinet.init(customWidth: 3.0,
                            customHeight: 5.0)
 print("The area of the cabinet is \(cabinet.area).")
+
 
 
 struct Character {
@@ -455,5 +457,26 @@ struct Character {
 let character = Character(customName: "Gale",
                           actor: "Dorothy")
 character.isProbablyGoingToDie // false
+
+
+struct Human {
+    
+    var name: String
+    var id: Int
+}
+
+
+extension Human {
+    
+    init(name: String) {
+        
+        self.name = name
+        id = Int.random(in: 1...99)
+    }
+}
+
+
+let human = Human(name: "Dorothy", id: 1)
+let ozma = Human(name: "Ozma")
 
 //: [Next](@next)
