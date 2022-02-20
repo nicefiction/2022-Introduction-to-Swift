@@ -194,4 +194,120 @@ app.name
 ///ERROR: `downloads`is inaccessible due to `private` protection level.
 
 
+
+/// Static properties and methods
+/// https://www.hackingwithswift.com/quick-start/beginners/static-properties-and-methods
+/// Use this technique  for two things:
+/// (1) Creating example data,
+/// and (2) storing fixed data that needs to be accessed in various places.
+
+struct AnotherSchool {
+    
+    static var studentCount: Int = 0
+    
+    /// NOTICE how we are able to modify the `studentCount` property
+    /// without marking the method as `mutating`
+    /// — the `mutating`keyword is only needed with regular struct functions
+    /// for times when an instance of struct was created as a constant,
+    /// and there is no instance when calling `add()`.
+    static func add(student name: String) {
+        
+        print("Adds a new student with name \(name).")
+        studentCount += 1
+    }
+}
+
+
+AnotherSchool.studentCount
+AnotherSchool.add(student: "Dorothy")
+AnotherSchool.studentCount
+
+/// Use `static` properties to organize common data in your apps:
+
+struct AppData {
+    
+    static let version = "1.3 beta 2"
+    static let saveFilename = "settings.json"
+    static let homeURL = "https://www.hackingwithswift.com"
+}
+
+///What’s the point of static properties and methods in Swift?
+///https://www.hackingwithswift.com/quick-start/understanding-swift/whats-the-point-of-static-properties-and-methods-in-swift
+
+/// Using this approach,
+/// everywhere I need to check or display something like my app’s version number
+/// — an about screen, debug output, logging information, support emails, etc —
+/// I can read `AppData.version`.
+
+///The second reason to use `static` data is
+///to create examples of your structs.
+
+struct Employee {
+    
+    var name: String
+    var role: String
+    
+    static let example = Employee(name: "exampleName",
+                                  role: "exampleRole")
+}
+
+///And now
+///whenever you need an `Employee` instance to work with in your design previews,
+///you can use `Employee.example` and you are done.
+
+
+struct NewsStory {
+    
+    static var BreakingNewsCount: Int = 0
+    static var RegularNewsCount: Int = 0
+    
+    var headline: String
+    
+    
+    init(headline: String,
+         isBreakingNews: Bool) {
+        
+        self.headline = headline
+        if isBreakingNews {
+            Self.BreakingNewsCount += 1
+        } else {
+            Self.RegularNewsCount += 1
+        }
+    }
+}
+
+
+struct Cat {
+    
+    static var allCats = Array<Cat>()
+    
+    
+    init() {
+        /// Referencing a `static` property inside a regular method isn't allowed;
+        // allCats.append(self)
+        /// This should use Person.population
+        Self.allCats.append(self)
+    }
+}
+
+let cat = Cat()
+print("Number of cats in the Static Cat Array: \(Cat.allCats.count)")
+
+
+struct Raffle {
+    
+    static var ticketsUsed: Int  = 0
+    
+    var name: String
+    var tickets: Int
+    
+    init(name: String,
+         tickets: Int) {
+        
+        self.name = name
+        self.tickets = tickets
+        Self.ticketsUsed += tickets
+    }
+}
+
 //: [Next](@next)
