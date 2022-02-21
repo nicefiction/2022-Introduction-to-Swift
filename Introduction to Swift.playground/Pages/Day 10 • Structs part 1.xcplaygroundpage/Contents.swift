@@ -126,7 +126,7 @@ struct Employee3 {
         }
         /// Code that writes:
         set {
-            print("New Value for vacation allocate: \(newValue)")
+            print("New Value for allocated vacation: \(newValue)")
             return vacationAllocated = vacationTaken + newValue
         }
     }
@@ -136,9 +136,15 @@ var employee3 = Employee3(name: "Dorothy",
                           vacationAllocated: 10,
                           vacationTaken: 2)
 employee3.vacationRemaining
+print("Vacation remaining: \(employee3.vacationRemaining)")
+print(employee3.vacationTaken)
+print(employee3.vacationAllocated)
 /// With both a getter and setter in place,
 /// we can now modify `vacationRemaining` (OLIVIER: directly:
-employee3.vacationRemaining = 3
+employee3.vacationRemaining = 30
+print("Vacation remaining: \(employee3.vacationRemaining)")
+print(employee3.vacationTaken)
+print(employee3.vacationAllocated)
 
 /// When should you use a computed property or a stored property?
 /// https://www.hackingwithswift.com/quick-start/understanding-swift/when-should-you-use-a-computed-property-or-a-stored-property
