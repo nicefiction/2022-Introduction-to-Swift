@@ -145,5 +145,38 @@ print(user1.username, user2.username, user3.username, separator: ", ")
 
 
 
+///How to create a deinitializer for a class
+///https://www.hackingwithswift.com/quick-start/beginners/how-to-create-a-deinitializer-for-a-class
+
+class Human {
+    
+    let id: Int
+    
+    
+    init(id: Int) {
+        self.id = id
+        print("Creating an instance of Human with ID \(id).")
+    }
+    
+    deinit {
+        print("Deleting the instance of Human with ID \(id).")
+    }
+}
+
+
+//var human = Human(name: "Dorothy")
+
+var humans = Array<Human>()
+
+
+for eachNumber in 1...3 {
+    let human = Human(id: eachNumber)
+    print("Human with ID \(human.id) created")
+    humans.append(human)
+}
+
+humans.removeAll()
+
+
 
 //: [Next](@next)
