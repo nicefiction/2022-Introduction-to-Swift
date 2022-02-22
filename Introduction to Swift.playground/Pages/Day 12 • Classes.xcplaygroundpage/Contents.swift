@@ -118,4 +118,32 @@ class Piano: Instrument {
 
 
 
+///How to copy classes
+///https://www.hackingwithswift.com/quick-start/beginners/how-to-copy-classes
+
+// struct User {
+class User {
+    
+    var username: String = "Anonymous"
+    
+    
+    func copy()
+    -> User {
+        
+        return User()
+    }
+}
+
+
+let user1 = User()
+var user2 = user1
+user2.username = "Glinda"
+/// Creates a _deep copy_ from `user1`:
+var user3 = user1.copy()
+user3.username = "Ozma"
+print(user1.username, user2.username, user3.username, separator: ", ")
+
+
+
+
 //: [Next](@next)
