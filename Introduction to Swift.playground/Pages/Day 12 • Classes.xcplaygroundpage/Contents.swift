@@ -178,5 +178,73 @@ for eachNumber in 1...3 {
 humans.removeAll()
 
 
+/// How to work with variables inside classes
+/// https://www.hackingwithswift.com/quick-start/beginners/how-to-work-with-variables-inside-classes
+
+class Runner {
+    
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
+
+// let runner = Runner.init(name: "Dorothy")
+let runner = Runner.init(name: "Dorothy")
+runner.name = "Ozma"
+// runner = Runner.init(name: "Glinda")
+print(runner.name) // Glinda
+
+
+class Pizza {
+    
+    private var topppings = Array<String>()
+    
+    
+    func add(topping: String) {
+        
+        topppings.append(topping)
+    }
+}
+
+let pizza = Pizza.init()
+pizza.add(topping: "Mushrooms")
+
+
+
+struct KinderGarten {
+    
+    var numberOfScreamingKids: Int = 20
+    
+    
+    mutating func handOutIceCream() {
+        
+        numberOfScreamingKids = 0
+    }
+}
+
+
+let kinderGarten = KinderGarten.init()
+// kinderGarten.handOutIceCream()
+/// ERROR: Cannot use mutating member on immutable value: 'kinderGarten' is a 'let' constant
+/// Compare this to:
+
+struct Code {
+    
+    var bugs: Int = 100
+    
+    
+    mutating func fixBug() {
+        
+        bugs += 3
+    }
+}
+
+
+var code = Code.init()
+code.fixBug()
+
 
 //: [Next](@next)
