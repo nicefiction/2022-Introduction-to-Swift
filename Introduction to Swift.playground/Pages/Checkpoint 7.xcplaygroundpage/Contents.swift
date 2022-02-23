@@ -81,7 +81,7 @@ class Cat: Animal {
 }
 
 
-class Persian: Cat {
+final class Persian: Cat {
     
     override func speak() {
         
@@ -90,7 +90,7 @@ class Persian: Cat {
 }
 
 
-class Lion: Cat {
+final class Lion: Cat {
     
     override func speak() {
         
