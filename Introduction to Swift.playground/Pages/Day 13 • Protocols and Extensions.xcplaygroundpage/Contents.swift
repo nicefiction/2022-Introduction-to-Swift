@@ -161,4 +161,43 @@ func buy(_ item: CanBePurchased) {
 buy(book)
 buy(cd)
 
+
+/// How to use opaque return types
+/// https://www.hackingwithswift.com/quick-start/beginners/how-to-use-opaque-return-types
+
+func getRandomNumber()
+// -> Int {
+// -> Equatable {
+    /// ERROR:
+    /// Protocol `Equatable` can only be used as a generic constraint
+    /// because it has `Self` or associated type requirements.
+/// To create an _opaque return_ type,
+/// add the keyword `some` before their return type, like this:
+-> some Equatable {
+    
+    let randomNumber = Int.random(in: 1...10)
+    print("Random number: \(randomNumber)")
+    
+    return randomNumber
+}
+
+
+func getRandomAnswer()
+-> some Equatable {
+    
+    let randomAnswer = Bool.random()
+    print("Random answer: \(randomAnswer)")
+    
+    return randomAnswer
+}
+
+
+getRandomNumber() == getRandomNumber()
+getRandomAnswer() == getRandomAnswer()
+// getRandomAnswer() == getRandomNumber() // ERROR
+
+/// Returning an _opaque return type_ means
+/// we still get to focus on the functionality we want to return rather than the specific type,
+/// which in turn allows us to change our mind in the future without breaking the rest of our code.
+
 //: [Next](@next)
