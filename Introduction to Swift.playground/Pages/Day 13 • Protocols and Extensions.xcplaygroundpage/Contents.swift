@@ -298,6 +298,69 @@ lyrics.lines.count // 4
 
 
 
+/// How to create and use protocol extensions
+/// https://www.hackingwithswift.com/quick-start/beginners/how-to-create-and-use-protocol-extensions
+
+extension Collection {
+    
+    var isNotEmpty: Bool {
+        
+        return self.isEmpty == false
+    }
+}
+
+
+let guests: [String] = [
+    "Dorothy", "Ozma", "Glinda"
+]
+
+
+if guests.isEmpty == false {
+    
+    print("Guest count: \(guests.count)")
+}
+
+
+if guests.isNotEmpty {
+    
+    print("Guest count: \(guests.count)")
+}
+
+
+protocol Human {
+    
+    var name: String { get }
+    func sayHello() -> Void
+}
+
+
+extension Human {
+    
+    func sayHello()
+    -> Void {
+        
+        print("Hello \(name)!")
+    }
+}
+
+
+struct Person: Human {
+    
+    var name: String
+    
+    
+    func sayHello()
+    -> Void {
+        
+        print("Hello again, \(name)!")
+    }
+}
+
+
+let dorothy: Person = Person(name: "Dorothy Gale")
+dorothy.sayHello()
+
+
 
 
 //: [Next](@next)
