@@ -200,4 +200,104 @@ getRandomAnswer() == getRandomAnswer()
 /// we still get to focus on the functionality we want to return rather than the specific type,
 /// which in turn allows us to change our mind in the future without breaking the rest of our code.
 
+
+
+/// How to create and use extensions
+/// https://www.hackingwithswift.com/quick-start/beginners/how-to-create-and-use-extensions
+
+
+var quote = "       hello world"
+let trimmedQuote = quote.trimmingCharacters(in: CharacterSet.whitespaces)
+
+
+extension String {
+    
+     // /////////////////////////
+    // MARK: Computed Properties
+    
+    var lines: [String] {
+        /// `components` breaks the `String` up into a `String Array`
+        /// by splitting it on a boundary of our choosing:"
+        return self.components(separatedBy: CharacterSet.newlines)
+    }
+    
+    
+     // /////////////
+    // MARK: Methods
+    
+    func trimmed()
+    -> String {
+        
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    }
+    
+    
+//    func trim(_ word: Self)
+//    -> Void {
+//
+//        word.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//    }
+    mutating func trim() {
+        
+        /// The value is not returned, but changed in place.
+        self = self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    }
+}
+
+
+var anotherQuote: String = "           hello again"
+let anotherTrimmedQuote: String = anotherQuote.trimmed()
+
+
+/// Global Function:
+/// OLIVIER:
+/// Notice how the value is only changed locally.
+/// The value is not changed in place from the method,
+/// or the method does not return the changed value.
+func trim(_ word: String)
+-> Void{
+
+    word.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+}
+///Writing global functions makes your code rather messy
+///— they are hard to organize and hard to keep track of.
+///On the other hand,
+///extensions are naturally grouped by the data type they are extending.
+///What’s more,
+///extensions make it easier to modify values in place
+///`finalQuote.trim()`
+///— i.e., to change a value directly, rather than return a new value.
+
+
+var finalQuote: String = "         So long."
+var globalQuote: String = "      Hola"
+
+/// Global function:
+trim(globalQuote)
+print("Global Quote trimmed: \(globalQuote)")
+
+let capturedTrimmedGlobalQuote: String = globalQuote.trimmed()
+print("Captured Quote trimmed: \(capturedTrimmedGlobalQuote)")
+
+/// Function in the Extension:
+finalQuote.trim()
+print("Final Quote trimmed: \(finalQuote)")
+
+let finalTrimmedQuote: String = "     Thursday"
+finalTrimmedQuote.trimmed()
+
+
+let lyrics: String = """
+Blue
+Yellow
+Red
+Green
+"""
+
+lyrics.lines.count // 4
+
+
+
+
+
 //: [Next](@next)
