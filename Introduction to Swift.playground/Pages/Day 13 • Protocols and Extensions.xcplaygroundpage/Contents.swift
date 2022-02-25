@@ -363,4 +363,57 @@ dorothy.sayHello()
 
 
 
+///How to get the most from protocol extensions
+///https://www.hackingwithswift.com/quick-start/beginners/how-to-get-the-most-from-protocol-extensions
+
+// extension Int {
+/// Both `Int`and `Double`adopt the Numeric protocol:
+extension Numeric {
+    
+    func squared()
+    // -> Int {
+    -> Self {
+        
+        return self * self
+    }
+}
+///NOTE
+///`self` refers to the current value,
+///and `Self` refers to the current type.
+
+let number: Int = 5
+5.squared()
+number.squared()
+
+let doubleNumber: Double = 6
+doubleNumber.squared()
+
+
+
+struct User: Equatable,
+             Comparable {
+    
+    var name: String
+    
+    
+    static func < (lhs: User,
+                   rhs: User)
+    -> Bool {
+        
+        lhs.name < rhs.name
+    }
+}
+
+
+let user1: User = User.init(name: "Dorothy")
+let user2: User = User.init(name: "Ozma")
+user1 == user2
+user1 < user2
+user1 >= user2
+///we don’t even need to add `Equatable` to our struct in order to get `==` to work.
+///Behind the scenes,
+///Swift uses _protocol inheritance_
+///so that `Comparable` automatically also means `Equatable`.
+
+
 //: [Next](@next)
