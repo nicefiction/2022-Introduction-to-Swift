@@ -74,4 +74,107 @@ if let _albumIndex = albums.firstIndex(of: album) {
     print("Album \(albums[_albumIndex]) is in the albums Array.")
 }
 
+
+
+///How to unwrap optionals with guard
+///https://www.hackingwithswift.com/quick-start/beginners/how-to-unwrap-optionals-with-guard
+///https://www.hackingwithswift.com/quick-start/understanding-swift/when-to-use-guard-let-rather-than-if-let
+///`guard let` is designed to exit the current function, loop, or condition if the check fails,
+///so any values you unwrap using it will stay around after the check.
+///Use `if let` if you just want to unwrap some optionals,
+///but prefer `guard let` if you are specifically checking that conditions are correct before continuing.
+
+func returnSquare(_ number: Int?)
+-> Int? {
+    
+    guard let _number = number
+    else { return nil }
+    
+    return (_number * _number)
+}
+
+
+returnSquare(5)
+
+
+func printSquare(of number: Int?)
+-> Void {
+    
+    guard let _number = number
+    else {
+        print("Please add a valid number.")
+        return
+    }
+    
+    print("\(_number) squared is \(_number * _number)")
+}
+
+printSquare(of: 6)
+
+
+///TIP:
+///You can use `guard` with any condition,
+///including ones that _don’t_ unwrap optionals.
+///For example, you might use:
+func printAlbums(_ albums: [String])
+-> Void {
+    
+    guard albums.isEmpty
+    else {
+        print(albums)
+        return
+    }
+}
+
+printAlbums(albums)
+
+
+func getMeaningOfLife()
+-> Int? {
+    
+    return 42
+}
+
+
+func printMeaningOfLife()
+-> Void {
+    
+    guard let _number = getMeaningOfLife()
+    else { return }
+    ///`guard let` lets us focus on the “happy path”
+    ///— the behavior of our function when everything has gone to plan:
+    print("\(_number) is the answer to the meaning of Life.")
+}
+
+getMeaningOfLife()
+printMeaningOfLife()
+
+
+func double(_ number: Int?)
+-> Int? {
+    
+    guard let _number = number
+    else { return nil }
+    
+    return _number * 2
+}
+
+
+let input: Int = 8
+if let _number = double(input) {
+    print(_number)
+}
+
+
+func verify(_ age: Int?)
+-> Bool {
+    
+    guard age != nil
+    else { return false }
+    
+    return true
+}
+
+
+
 //: [Next](@next)
