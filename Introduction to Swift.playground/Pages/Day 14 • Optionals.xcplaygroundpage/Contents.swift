@@ -176,5 +176,68 @@ func verify(_ age: Int?)
 }
 
 
+///How to unwrap optionals with nil coalescing
+///https://www.hackingwithswift.com/quick-start/beginners/how-to-unwrap-optionals-with-nil-coalescing
+
+let colors: [String: String] = [
+    "blue": "🔵",
+    "red": "🔴",
+    "yellow": "🟡"
+]
+
+let green = colors["green", default: "N/A"]
+let purple = colors["purple"] ?? "N/A"
+
+
+struct Book {
+    
+    var author: String?
+    var title: String
+}
+
+let book = Book(author: nil,
+                title: "Hello world")
+
+let author = book.author ?? "Anonymous"
+
+
+let stringInput: String = ""
+let integerConversion: Int = Int(stringInput) ?? 0
+
+
+let cmykColors: [String] = [
+    "Cyan", "Magenta", "Yellow", "Black"
+]
+
+let randomCMYKColor = cmykColors.randomElement() ?? "None"
+
+
+///NOTE:
+///You can chain nil coalescing if you want to,
+///although I don’t think it is common.
+///So, this kind of code is valid if you wanted it:
+
+func first(array: [String?])
+-> String? {
+    
+    return array[0]
+}
+
+
+func second(array: [String?])
+-> String? {
+    
+    return array[0]
+}
+
+
+let emptyArray: [String?] = [nil]
+let selectedElement = first(array: emptyArray) ?? second(array: emptyArray) ?? "N/A"
+
+
+
+var bestPony: String? = "Pinkie"
+let selectedPony: String = bestPony ?? "Snowhite"
+let anotherPony: String? = bestPony ?? "Snowhite"
 
 //: [Next](@next)
