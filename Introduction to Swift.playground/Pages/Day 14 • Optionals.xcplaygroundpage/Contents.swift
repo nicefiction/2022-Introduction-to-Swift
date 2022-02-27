@@ -290,4 +290,59 @@ let lastSongAllCaps = songs?.last?.uppercased()
 let attendees: [String] = Array<String>()
 let firstAttendeeAllCaps = attendees.first?.uppercased()
 
+
+
+///How to handle function failure with optionals
+///https://www.hackingwithswift.com/quick-start/beginners/how-to-handle-function-failure-with-optionals
+///You’ll find `try?` is mainly used in three places:
+///(1) In combination with `guard let` to exit the current function if the `try? `call returns `nil`.
+///(2) In combination with nil coalescing to attempt something or provide a default value on failure.
+///(3) When calling any throwing function without a return value,
+///when you genuinely don’t care if it succeeded or not
+///— maybe you are writing to a log file or sending analytics to a server, for example.
+
+enum UserError: Error {
+    case badID, networkFailed
+}
+
+
+func getUser(id: Int) throws
+-> String {
+    
+    if id == 0 {
+        throw UserError.badID
+    } else if id < 0 {
+        throw UserError.networkFailed
+    } else {
+        return "User with ID \(id)."
+    }
+}
+
+
+do {
+    let result = try getUser(id: 10)
+    print(result)
+} catch UserError.badID {
+    print("Bad user ID.")
+} catch UserError.networkFailed {
+    print("Network failed.")
+} catch let error {
+    print(error.localizedDescription)
+}
+
+///When should you use optional `try?`
+/// If you want to run a function and care only that it succeeds or fails
+/// – you don’t need to distinguish between the various reasons why it might fail –
+/// then using optional `try?` is a great fit,
+/// because you can boil the whole thing down to _“did it work?”_
+
+if let _result = try? getUser(id: 12) {
+    print("User: \(_result)")
+}
+
+let result = (try? getUser(id: 23)) ?? "Anonymous"
+print("User 2: \(result)")
+
+
+
 //: [Next](@next)
