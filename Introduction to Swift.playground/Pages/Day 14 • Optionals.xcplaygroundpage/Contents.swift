@@ -54,7 +54,7 @@ func getUsername()
 
 let optionalUsername = getUsername()
 
-print(optionalUsername) /// Prints `Optional("Dorothy")`
+// print(optionalUsername) /// Prints `Optional("Dorothy")`
 
 if let _optionalUsername = optionalUsername {
     print("Unwrapped optional username: \(_optionalUsername).")
@@ -239,5 +239,55 @@ let selectedElement = first(array: emptyArray) ?? second(array: emptyArray) ?? "
 var bestPony: String? = "Pinkie"
 let selectedPony: String = bestPony ?? "Snowhite"
 let anotherPony: String? = bestPony ?? "Snowhite"
+
+
+
+///How to handle multiple optionals using optional chaining
+///https://www.hackingwithswift.com/quick-start/beginners/how-to-handle-multiple-optionals-using-optional-chaining
+
+/*
+ struct Book {
+     
+     var author: String?
+     var title: String
+ }
+ */
+
+let emeraldCity: Book? = Book(author: nil,
+                              title: "The Emerald City")
+
+let firstLetterUppercased = emeraldCity?.author?.first?.uppercased() ?? "A"
+///So, it reads
+///“if we have a book,
+///and the book has an author,
+///and the author has a first letter,
+///then uppercase it and send it back,
+///otherwise
+///send back A”.
+
+
+let movieCast: [String: String] = [
+    "Dorothy": "Gale",
+    "Glinda": "of Oz",
+    "Ozma": "of Oz"
+]
+
+let glindaSurname = movieCast["Glinda"]?.first?.uppercased() ?? "N/A"
+print("Glinda: \(glindaSurname)")
+
+
+let characters: [String] = [
+    "Dorothy", "Ozma", "Glinda", ""
+]
+
+
+let characterCount = characters.last?.count
+
+
+let songs: [String]? = Array<String>()
+let lastSongAllCaps = songs?.last?.uppercased()
+
+let attendees: [String] = Array<String>()
+let firstAttendeeAllCaps = attendees.first?.uppercased()
 
 //: [Next](@next)
