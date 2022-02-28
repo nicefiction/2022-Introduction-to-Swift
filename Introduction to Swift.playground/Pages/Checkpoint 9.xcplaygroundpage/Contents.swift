@@ -14,10 +14,15 @@ import Foundation
 func chooseRandomNumber(from numbers: [Int]?)
 -> Int {
     
-    guard let _numbers = numbers
+//    guard let _numbers = numbers
+//    else { return Int.random(in: 1...100) }
+//
+//    return !_numbers.isEmpty ? _numbers[Int.random(in: 0..<_numbers.count)] : Int.random(in: 1...100)
+    
+    guard let _number = numbers?.randomElement()
     else { return Int.random(in: 1...100) }
     
-    return !_numbers.isEmpty ? _numbers[Int.random(in: 0..<_numbers.count)] : Int.random(in: 1...100)
+    return _number
 }
 
 
@@ -67,3 +72,4 @@ try? anotherRandomNumberFrom([])
 
 
 //: [Next](@next)
+

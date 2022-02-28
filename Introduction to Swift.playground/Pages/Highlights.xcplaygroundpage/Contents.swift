@@ -6,7 +6,17 @@ import Foundation
 
 struct Timer {
     
-    var totalTime: Int
+    var totalTime: Int {
+        
+        willSet {
+            print("The total time will be set to \(newValue).")
+        }
+        
+        didSet {
+            print("The total time was \(oldValue).")
+            print("The updated total time is \(totalTime).")
+        }
+    }
     var elapsedTime: Int
     var timeRemaining: Int {
         
